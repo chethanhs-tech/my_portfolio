@@ -82,10 +82,10 @@ export default function Home() {
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground tracking-tight">
               {SITE_METADATA.name}
             </h2>
-            <div className="text-muted text-lg md:text-2xl font-medium mt-1">
+            <div className="text-muted text-center md:text-left text-lg md:text-2xl font-medium mt-1">
               Developing Cloud Engineer & AI Enthusiast
             </div>
-            <div className="text-muted/80 text-sm md:text-lg font-mono mt-2">
+            <div className="text-muted/80 text-center md:text-left text-sm md:text-lg font-mono mt-2">
               20, {SITE_METADATA.location}
             </div>
             
