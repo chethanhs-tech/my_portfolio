@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowDownRight, ArrowUpRight, Link as LinkIcon, Mail } from "lucide-react";
@@ -18,6 +19,15 @@ import { ProjectCard } from "@/components/shared/ProjectCard";
 import { WritingCard } from "@/components/shared/WritingCard";
 
 export default function Home() {
+  useEffect(() => {
+    // Prevent browser from restoring previous scroll position
+    if (typeof window !== "undefined" && "scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+    // Force scroll to top on mount
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="flex flex-col gap-16 md:gap-24 pb-24">
       
