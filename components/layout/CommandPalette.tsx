@@ -17,9 +17,27 @@ export function CommandPalette() {
         setOpen((open) => !open);
       }
     };
+    const openMenu = () => setOpen(true);
+    
     document.addEventListener("keydown", down);
-    return () => document.removeEventListener("keydown", down);
+    document.addEventListener("open-command-palette", openMenu);
+    
+    return () => {
+      document.removeEventListener("keydown", down);
+      document.removeEventListener("open-command-palette", openMenu);
+    };
   }, []);
+
+  React.useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [open]);
 
   const runCommand = React.useCallback((command: () => void) => {
     setOpen(false);

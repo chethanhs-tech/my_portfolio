@@ -17,6 +17,7 @@ import { TechChips } from "@/components/shared/TechChips";
 import { ContactSection } from "@/components/shared/ContactSection";
 import { ProjectCard } from "@/components/shared/ProjectCard";
 import { WritingCard } from "@/components/shared/WritingCard";
+import { HeroMotion } from "@/components/shared/HeroMotion";
 
 export default function Home() {
   useEffect(() => {
@@ -32,26 +33,9 @@ export default function Home() {
     <div className="flex flex-col gap-16 md:gap-24 pb-24">
       
       {/* HERO SECTION (BANNER + PROFILE) */}
-      <section className="flex flex-col w-[calc(100%+3rem)] md:w-[calc(100%+6rem)] -mx-6 md:-mx-12">
+      <section className="flex flex-col -mx-6 md:-mx-12 overflow-hidden">
         {/* Banner Area */}
-        <div className="relative w-full h-[250px] md:h-[320px] bg-surface flex flex-col items-center justify-center p-6 text-center border-b border-border/50">
-          {/* Subtle star-like/noise background effect */}
-          <div className="absolute inset-0 opacity-40 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-foreground/5 via-background to-background"></div>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="z-10 flex flex-col items-center gap-2 md:gap-4 px-4"
-          >
-            <p className="text-muted/80 text-sm md:text-xl font-medium tracking-wide">
-              Everyone is building a version of themselves to be seen.
-            </p>
-            <h1 className="text-xl md:text-3xl lg:text-4xl font-bold tracking-tight text-foreground max-w-4xl leading-snug md:leading-tight">
-              I am building the version that refuses to be seen and still wins.
-            </h1>
-          </motion.div>
-        </div>
+        <HeroMotion />
 
         {/* Profile Area */}
         <div className="relative w-full bg-background px-6 py-8 md:px-12 md:py-10 flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-8">

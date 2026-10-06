@@ -65,23 +65,23 @@ export function Navbar() {
             </Link>
             
             <button 
-              onClick={() => document.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', metaKey: true }))}
-              className="flex items-center justify-center w-8 h-8 rounded-md bg-white/5 border border-border/50 hover:bg-white/10 transition-colors group"
+              onClick={() => document.dispatchEvent(new CustomEvent('open-command-palette'))}
+              className="flex items-center justify-center w-10 h-10 md:w-8 md:h-8 rounded-md bg-white/5 border border-border/50 hover:bg-white/10 transition-colors group"
               aria-label="Open Command Palette (Cmd+K)"
             >
-              <Command className="w-4 h-4 text-muted group-hover:text-foreground transition-colors" />
+              <Command className="w-5 h-5 md:w-4 md:h-4 text-muted group-hover:text-foreground transition-colors" />
             </button>
             
             {mounted ? (
               <button
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="flex items-center justify-center w-8 h-8 rounded-md bg-white/5 border border-border/50 hover:bg-white/10 transition-colors group"
+                className="flex items-center justify-center w-10 h-10 md:w-8 md:h-8 rounded-md bg-white/5 border border-border/50 hover:bg-white/10 transition-colors group"
                 aria-label="Toggle Theme"
               >
                 {theme === "dark" ? (
-                  <Sun className="w-4 h-4 text-muted group-hover:text-foreground transition-colors" />
+                  <Sun className="w-5 h-5 md:w-4 md:h-4 text-muted group-hover:text-foreground transition-colors" />
                 ) : (
-                  <Moon className="w-4 h-4 text-muted group-hover:text-foreground transition-colors" />
+                  <Moon className="w-5 h-5 md:w-4 md:h-4 text-muted group-hover:text-foreground transition-colors" />
                 )}
               </button>
             ) : (

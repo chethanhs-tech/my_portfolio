@@ -122,7 +122,32 @@ export const DEV_NOTES_DRAFTS = [
     date: "2026-10-01",
     readingTime: "6 min",
     category: "Architecture",
-    content: "<h2>The Architecture Behind Cyber Sentinel Intelligence</h2><p>Nulltrace was built to solve a growing problem: the sophisticated nature of modern phishing attacks that bypass traditional filters. I architected it as an advanced, AI-powered ecosystem designed to neutralize digital threats in real-time.</p><h3>Core Integrations & Chrome Extension (V3)</h3><p>At the heart of the platform is a sleek Chrome Extension using Manifest V3. By utilizing context-menu scanning, users can right-click any selected text—whether it's an email on Gmail or a message on WhatsApp Web—to instantly run it against our <strong>Cyber Sentinel</strong> engine.</p><h3>Voice Sentinel & Gemini 2.5 Flash</h3><p>One of the most challenging features to implement was the <strong>Voice Sentinel</strong>. Traditional scanners only look at text, but modern social engineering happens over audio (e.g., deepfakes, coercive voice notes). By combining <strong>Deepgram Nova-2</strong> for neural speech-to-text transcription and <strong>Gemini 2.5 Flash</strong> for threat analysis, Nulltrace can analyze emotional vectors, urgency tactics, and financial fraud scripts directly from audio uploads or live microphone captures.</p><h3>Automated Workflows with n8n</h3><p>To ensure threats are actioned immediately, I built end-to-end automation pipelines using <strong>n8n</strong>. High-risk scans automatically trigger WhatsApp notifications via webhooks, and the system aggregates 24-hour scan histories from our Supabase database to dispatch daily digest emails. This decoupled architecture allows the system to scale effortlessly without bogging down the main application thread.</p>"
+    content: `
+      <h3 class="text-lg font-bold text-foreground mt-6 mb-3">Introduction</h3>
+      <p class="mb-4 text-muted/90 leading-relaxed">Nulltrace was built to solve a growing problem: the sophisticated nature of modern phishing attacks that easily bypass traditional filters. I architected it as an advanced, AI-powered ecosystem designed to neutralize digital threats in real-time, operating directly where users are most vulnerable: the browser.</p>
+      
+      <h3 class="text-lg font-bold text-foreground mt-6 mb-3">Why I Built It</h3>
+      <p class="mb-4 text-muted/90 leading-relaxed">I noticed that traditional scanners rely heavily on static blocklists and keyword matching. When scammers pivot to audio deepfakes, coercive voice notes, or heavily obfuscated text, legacy systems fail. I wanted to build a system that <strong class="text-foreground">understands intent</strong> rather than just matching patterns.</p>
+      
+      <h3 class="text-lg font-bold text-foreground mt-6 mb-3">Approach & Architecture</h3>
+      <p class="mb-4 text-muted/90 leading-relaxed">The core of the platform is a sleek <span class="text-accent font-mono text-sm bg-white/5 border border-white/10 px-1.5 py-0.5 rounded">Manifest V3</span> Chrome Extension. It leverages a microservices architecture to decouple the scanning engine from the user interface.</p>
+      <ul class="list-disc pl-6 space-y-2 mb-6 text-muted/90">
+        <li><strong class="text-foreground">Frontend:</strong> React-based extension popup and content scripts for seamless DOM interaction.</li>
+        <li><strong class="text-foreground">Backend & Storage:</strong> <span class="text-accent font-mono text-sm bg-white/5 border border-white/10 px-1.5 py-0.5 rounded">Supabase</span> (PostgreSQL) for storing scan history and generating a <em>Trust Score</em>.</li>
+        <li><strong class="text-foreground">AI Engine:</strong> <span class="text-accent font-mono text-sm bg-white/5 border border-white/10 px-1.5 py-0.5 rounded">Gemini 2.5 Flash</span> for ultra-fast, context-aware threat analysis.</li>
+        <li><strong class="text-foreground">Audio Processing:</strong> Deepgram Nova-2 for real-time neural speech-to-text.</li>
+      </ul>
+
+      <h3 class="text-lg font-bold text-foreground mt-6 mb-3">Implementation & Important Decisions</h3>
+      <p class="mb-4 text-muted/90 leading-relaxed">One of the most critical decisions was moving the heavy lifting to automated workflows using <strong class="text-foreground">n8n</strong>. By decoupling the notification system, high-risk scans automatically trigger WhatsApp alerts via webhooks without blocking the main application thread.</p>
+      <p class="mb-4 text-muted/90 leading-relaxed">For the <strong class="text-foreground">Voice Sentinel</strong> feature, I had to process audio captures efficiently. I chose to stream the microphone data directly to Deepgram, then pipe the transcript to Gemini with a highly specific prompt designed to detect emotional vectors and urgency tactics.</p>
+
+      <h3 class="text-lg font-bold text-foreground mt-6 mb-3">Challenges & Problems</h3>
+      <p class="mb-4 text-muted/90 leading-relaxed">Handling async state across Chrome Extension service workers was incredibly painful. Manifest V3's strict lifecycle meant service workers could terminate mid-scan. I solved this by maintaining a persistent connection to Supabase and using its real-time capabilities to sync state back to the popup once the background task completed.</p>
+
+      <h3 class="text-lg font-bold text-foreground mt-6 mb-3">Key Takeaways</h3>
+      <p class="mb-4 text-muted/90 leading-relaxed">Building Nulltrace reinforced the importance of <strong class="text-foreground">resilient architecture</strong>. When integrating multiple third-party APIs (Gemini, Deepgram, Supabase), you must design for failure. Graceful degradation and robust error handling turned a fragile prototype into a production-ready security tool.</p>
+    `
   },
   {
     id: "tracxnlabs-architecture",
@@ -131,7 +156,29 @@ export const DEV_NOTES_DRAFTS = [
     date: "2026-09-25",
     readingTime: "7 min",
     category: "Development",
-    content: "<h2>The Examination Architecture</h2><p>When I set out to build TracxnLabs, the primary challenge wasn't just rendering questions to a student—it was maintaining examination integrity in a fully remote environment. The platform needed to handle automated coding evaluations alongside continuous telemetry.</p><h3>React & Supabase Synergy</h3><p>I built the student portal using <strong>React (Vite) and TypeScript</strong> to maintain a strict, type-safe frontend, powered by <strong>Supabase</strong> on the backend. This architecture allowed me to manage complex RBAC (Role-Based Access Control) efficiently between students and administrators. The coding challenge evaluation pipeline runs isolated executions, tracking execution time and output accuracy against predefined test cases.</p><h3>Deployment and Scaling</h3><p>Deploying the infrastructure taught me a lot about edge caching and serverless cold starts. By utilizing Edge Functions, the system can instantly reject invalid submission payloads before they hit the core relational database, drastically reducing database load during high-traffic examination windows.</p>"
+    content: `
+      <h3 class="text-lg font-bold text-foreground mt-6 mb-3">Introduction</h3>
+      <p class="mb-4 text-muted/90 leading-relaxed">When I set out to build TracxnLabs, the primary challenge wasn't just rendering questions to a student—it was maintaining examination integrity in a fully remote environment. The platform needed to handle automated coding evaluations alongside continuous telemetry.</p>
+
+      <h3 class="text-lg font-bold text-foreground mt-6 mb-3">The Problem</h3>
+      <p class="mb-4 text-muted/90 leading-relaxed">Remote examinations are notoriously difficult to secure. Traditional platforms either rely on invasive software installations or provide a weak browser sandbox that is easily bypassed. The goal was to build a secure, browser-based environment that could robustly evaluate both multiple-choice and live coding assessments.</p>
+
+      <h3 class="text-lg font-bold text-foreground mt-6 mb-3">Approach & Architecture</h3>
+      <p class="mb-4 text-muted/90 leading-relaxed">I architected the student portal using <strong class="text-foreground">React (Vite) and TypeScript</strong> to maintain a strict, type-safe frontend, powered by <span class="text-accent font-mono text-sm bg-white/5 border border-white/10 px-1.5 py-0.5 rounded">Supabase</span> on the backend. This architecture allowed me to manage complex RBAC (Role-Based Access Control) efficiently.</p>
+      
+      <h3 class="text-lg font-bold text-foreground mt-6 mb-3">Implementation Details</h3>
+      <ul class="list-disc pl-6 space-y-2 mb-6 text-muted/90">
+        <li><strong class="text-foreground">Coding Sandbox:</strong> The evaluation pipeline runs isolated executions, tracking execution time and output accuracy against predefined test cases.</li>
+        <li><strong class="text-foreground">Telemetry Tracking:</strong> Custom hooks monitor browser focus, visibility changes, and copy-paste events.</li>
+        <li><strong class="text-foreground">Edge Functions:</strong> Deployed Supabase <span class="text-accent font-mono text-sm bg-white/5 border border-white/10 px-1.5 py-0.5 rounded">Edge Functions</span> to instantly reject invalid submission payloads before they hit the core relational database.</li>
+      </ul>
+
+      <h3 class="text-lg font-bold text-foreground mt-6 mb-3">Challenges</h3>
+      <p class="mb-4 text-muted/90 leading-relaxed">Deploying the infrastructure taught me a lot about edge caching and serverless cold starts. During high-traffic examination windows, database load spiked. By moving payload validation and rate-limiting to the edge, I drastically reduced the database strain.</p>
+
+      <h3 class="text-lg font-bold text-foreground mt-6 mb-3">Result & Takeaways</h3>
+      <p class="mb-4 text-muted/90 leading-relaxed">The platform successfully handled concurrent examinations with zero downtime. I learned that <strong class="text-foreground">security should be built in layers</strong>—from the UI event listeners down to the database row-level security policies. Never trust the client.</p>
+    `
   },
   {
     id: "guardian-proctoring",
@@ -140,7 +187,26 @@ export const DEV_NOTES_DRAFTS = [
     date: "2026-09-20",
     readingTime: "5 min",
     category: "Chrome Extension",
-    content: "<h2>Beyond the Browser Sandbox</h2><p>Alongside the TracxnLabs examination platform, I explored Guardian—a Chrome extension-based AI proctoring layer designed to capture exam events, telemetry, and snapshots, feeding them into an AI-assisted auditing workflow. Standard web APIs often fall short when trying to enforce strict lock-down environments.</p><h3>Event Capture and Telemetry</h3><p>The core of Guardian relies on monitoring specific browser activities: tab switching, fullscreen exits, and multi-face detection via webcam streams. By listening for <code>visibilitychange</code> and blur events on the window, the extension continuously tracks student focus. I engineered a <strong>Credibility Scoring Engine</strong> where specific violations (e.g., tab switching) deduct points from a starting integrity score of 100.</p><h3>AI Auditing</h3><p>When a violation is detected, an evidence screenshot is captured and securely uploaded to Supabase Storage. These snapshots are then queued for auditing to determine whether multiple faces or unauthorized materials are present in the frame. The primary lesson here was balancing aggressive telemetry capture without degrading the student's local machine performance.</p>"
+    content: `
+      <h3 class="text-lg font-bold text-foreground mt-6 mb-3">Introduction</h3>
+      <p class="mb-4 text-muted/90 leading-relaxed">Alongside the TracxnLabs platform, I explored Guardian—a Chrome extension-based AI proctoring layer designed to capture exam events, telemetry, and snapshots, feeding them into an AI-assisted auditing workflow.</p>
+
+      <h3 class="text-lg font-bold text-foreground mt-6 mb-3">Why I Built It</h3>
+      <p class="mb-4 text-muted/90 leading-relaxed">Standard web APIs often fall short when trying to enforce strict lock-down environments. I needed deeper access to monitor tab states and window focus reliably, which is only possible through the Chrome Extension API.</p>
+
+      <h3 class="text-lg font-bold text-foreground mt-6 mb-3">Implementation: Event Capture and Telemetry</h3>
+      <p class="mb-4 text-muted/90 leading-relaxed">The core of Guardian relies on monitoring specific browser activities: tab switching, fullscreen exits, and multi-face detection via webcam streams. By listening for <code class="font-mono text-sm bg-white/5 px-1 py-0.5 rounded border border-white/10">visibilitychange</code> and blur events on the window, the extension continuously tracks student focus.</p>
+      <p class="mb-4 text-muted/90 leading-relaxed">I engineered a <strong class="text-foreground">Credibility Scoring Engine</strong> where specific violations (e.g., tab switching) deduct points from a starting integrity score of 100.</p>
+
+      <h3 class="text-lg font-bold text-foreground mt-6 mb-3">Approach: AI Auditing</h3>
+      <p class="mb-4 text-muted/90 leading-relaxed">When a violation is detected, an evidence screenshot is captured and securely uploaded to <span class="text-accent font-mono text-sm bg-white/5 border border-white/10 px-1.5 py-0.5 rounded">Supabase Storage</span>. These snapshots are then queued for auditing to determine whether multiple faces or unauthorized materials are present in the frame using <span class="text-accent font-mono text-sm bg-white/5 border border-white/10 px-1.5 py-0.5 rounded">Gemini AI</span> models.</p>
+
+      <h3 class="text-lg font-bold text-foreground mt-6 mb-3">Challenges</h3>
+      <p class="mb-4 text-muted/90 leading-relaxed">The primary challenge was balancing aggressive telemetry capture without degrading the student's local machine performance. Processing video frames constantly caused thermal throttling. I resolved this by sampling frames at dynamic intervals based on the user's current credibility score.</p>
+
+      <h3 class="text-lg font-bold text-foreground mt-6 mb-3">Key Takeaways</h3>
+      <p class="mb-4 text-muted/90 leading-relaxed">Building Guardian taught me the intricacies of <strong class="text-foreground">background service workers</strong> and performance optimization in browser extensions. It highlighted the importance of moving heavy computation off the main thread.</p>
+    `
   },
   {
     id: "grozosphere-supabase",
@@ -149,7 +215,26 @@ export const DEV_NOTES_DRAFTS = [
     date: "2026-09-15",
     readingTime: "5 min",
     category: "Database",
-    content: "<h2>Managing State & Complexity</h2><p>Building <strong>GrozoSphere</strong>, a smart grocery inventory and transaction management system, taught me a lot about relational database design. When you are dealing with inventory that changes in real-time based on user transactions, standard state management inside React isn't enough.</p><h3>PostgreSQL & Supabase Realtime</h3><p>I utilized <strong>Supabase</strong> as the backend to leverage PostgreSQL's robust relational features. One of the primary challenges was ensuring that when a transaction occurs, the inventory counts are updated atomically so no race conditions happen during checkout. By relying on Supabase's real-time subscriptions, I was able to broadcast inventory changes across all active client sessions instantly.</p><h3>Tailwind & React Synchronization</h3><p>On the frontend, keeping the UI snappy while waiting for database mutations required optimistic UI updates. Combining React's local state management with Tailwind CSS allowed for a highly responsive, fluid user experience even when network latency spiked.</p>"
+    content: `
+      <h3 class="text-lg font-bold text-foreground mt-6 mb-3">Introduction</h3>
+      <p class="mb-4 text-muted/90 leading-relaxed">Building <strong class="text-foreground">GrozoSphere</strong>, a smart grocery inventory and transaction management system, was a deep dive into complex relational database design and real-time state synchronization.</p>
+
+      <h3 class="text-lg font-bold text-foreground mt-6 mb-3">The Problem</h3>
+      <p class="mb-4 text-muted/90 leading-relaxed">When you are dealing with inventory that changes in real-time based on multiple concurrent user transactions, standard state management inside React isn't enough. I needed a way to guarantee atomic updates and broadcast state changes instantly.</p>
+
+      <h3 class="text-lg font-bold text-foreground mt-6 mb-3">Approach: PostgreSQL & Supabase Realtime</h3>
+      <p class="mb-4 text-muted/90 leading-relaxed">I utilized <span class="text-accent font-mono text-sm bg-white/5 border border-white/10 px-1.5 py-0.5 rounded">Supabase</span> as the backend to leverage PostgreSQL's robust relational features. One of the primary challenges was ensuring that when a transaction occurs, the inventory counts are updated atomically so no race conditions happen during checkout.</p>
+      
+      <h3 class="text-lg font-bold text-foreground mt-6 mb-3">Implementation</h3>
+      <ul class="list-disc pl-6 space-y-2 mb-6 text-muted/90">
+        <li><strong class="text-foreground">Database Triggers:</strong> Implemented <span class="text-accent font-mono text-sm bg-white/5 border border-white/10 px-1.5 py-0.5 rounded">PostgreSQL</span> triggers to automatically update stock levels upon transaction insertion.</li>
+        <li><strong class="text-foreground">Real-time Subscriptions:</strong> Relied on Supabase's real-time channels to broadcast inventory changes across all active client sessions instantly.</li>
+        <li><strong class="text-foreground">Optimistic Updates:</strong> Kept the UI snappy while waiting for database mutations by updating the local React state immediately and reverting on failure.</li>
+      </ul>
+
+      <h3 class="text-lg font-bold text-foreground mt-6 mb-3">What I Learned</h3>
+      <p class="mb-4 text-muted/90 leading-relaxed">I learned that letting the database do the heavy lifting (via constraints, functions, and triggers) results in a much cleaner application layer. Combining React's local state management with Tailwind CSS allowed for a highly responsive, fluid user experience even when network latency spiked.</p>
+    `
   }
 ];
 
