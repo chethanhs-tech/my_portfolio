@@ -36,7 +36,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} scroll-smooth`}
       suppressHydrationWarning
     >
-      <body className="max-w-[100vw] min-h-screen flex flex-col items-center bg-background text-foreground transition-colors duration-300">
+      <body className="w-full overflow-x-hidden min-h-screen flex flex-col items-center bg-background text-foreground transition-colors duration-300">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           <CustomCursor />
           <CommandPalette />

@@ -75,7 +75,12 @@ export default function Home() {
             
             <div className="flex items-center gap-4 mt-6">
               <a 
-                href={`mailto:${SITE_METADATA.email}`}
+                href="#contact"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                  window.history.pushState(null, '', '/#contact');
+                }}
                 className="px-6 py-2.5 bg-foreground text-background text-sm font-semibold rounded-lg hover:bg-foreground/90 transition-colors"
               >
                 Contact Me

@@ -134,7 +134,6 @@ export function ContactSection() {
               <div className="relative flex items-center border-b border-border/50 focus-within:border-foreground/50 transition-colors pb-4">
                 {currentStep === 4 ? (
                   <textarea
-                    autoFocus
                     value={formData[STEPS[currentStep - 1].name as keyof typeof formData]}
                     onChange={(e) => setFormData({ ...formData, [STEPS[currentStep - 1].name]: e.target.value })}
                     onKeyDown={handleKeyDown}
@@ -144,7 +143,6 @@ export function ContactSection() {
                 ) : (
                   <input
                     type={currentStep === 2 ? "email" : "text"}
-                    autoFocus
                     value={formData[STEPS[currentStep - 1].name as keyof typeof formData]}
                     onChange={(e) => setFormData({ ...formData, [STEPS[currentStep - 1].name]: e.target.value })}
                     onKeyDown={handleKeyDown}

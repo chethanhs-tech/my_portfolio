@@ -30,12 +30,25 @@ export function Navbar() {
           <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
             <Link 
               href="/" 
+              onClick={(e) => {
+                if (pathname === '/') {
+                  e.preventDefault();
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+              }}
               className={`transition-colors hover:text-foreground ${pathname === "/" ? "text-foreground" : "text-muted"}`}
             >
               Home
             </Link>
             <Link 
               href="/#work" 
+              onClick={(e) => {
+                if (pathname === '/') {
+                  e.preventDefault();
+                  document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' });
+                  window.history.pushState(null, '', '/#work');
+                }
+              }}
               className={`transition-colors hover:text-foreground ${pathname === "/#work" ? "text-foreground" : "text-muted"}`}
             >
               Work
@@ -48,6 +61,13 @@ export function Navbar() {
             </Link>
             <Link 
               href="/#contact" 
+              onClick={(e) => {
+                if (pathname === '/') {
+                  e.preventDefault();
+                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                  window.history.pushState(null, '', '/#contact');
+                }
+              }}
               className={`transition-colors hover:text-foreground ${pathname === "/#contact" ? "text-foreground" : "text-muted"}`}
             >
               Contact

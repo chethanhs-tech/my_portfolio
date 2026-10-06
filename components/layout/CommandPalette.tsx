@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { Code, FileText, Briefcase, Mail, Link as LinkIcon, Home } from "lucide-react";
 import { Command } from "cmdk";
 import { SITE_METADATA } from "@/data/content";
@@ -9,6 +9,7 @@ import { SITE_METADATA } from "@/data/content";
 export function CommandPalette() {
   const [open, setOpen] = React.useState(false);
   const router = useRouter();
+  const pathname = usePathname();
 
   React.useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -70,15 +71,25 @@ export function CommandPalette() {
             <Command.Group heading="Navigation" className="text-xs font-medium text-muted/80 px-2 py-1.5">
               <Command.Item
                 className="flex items-center gap-2 px-2 py-2.5 text-sm text-foreground hover:bg-white/5 rounded-md cursor-pointer aria-selected:bg-white/5"
-                onSelect={() => runCommand(() => router.push("/"))}
+                onSelect={() => runCommand(() => {
+                  if (pathname === '/') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  } else {
+                    router.push("/");
+                  }
+                })}
               >
                 <Home className="w-4 h-4 text-muted" /> Home
               </Command.Item>
               <Command.Item
                 className="flex items-center gap-2 px-2 py-2.5 text-sm text-foreground hover:bg-white/5 rounded-md cursor-pointer aria-selected:bg-white/5"
                 onSelect={() => runCommand(() => {
-                  router.push("/");
-                  setTimeout(() => document.getElementById("work")?.scrollIntoView({ behavior: "smooth" }), 100);
+                  if (pathname === '/') {
+                    document.getElementById("work")?.scrollIntoView({ behavior: "smooth" });
+                    window.history.pushState(null, '', '/#work');
+                  } else {
+                    router.push("/#work");
+                  }
                 })}
               >
                 <Briefcase className="w-4 h-4 text-muted" /> Work
