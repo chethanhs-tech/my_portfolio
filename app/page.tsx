@@ -58,8 +58,8 @@ export default function Home() {
 
           {/* Profile Info */}
           <motion.div 
-            initial={{ opacity: 0, x: -10 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="flex flex-col items-center md:items-start gap-1 md:gap-2 w-full md:mt-4"
           >
@@ -164,8 +164,8 @@ export default function Home() {
           {JOURNEY.map((exp, index) => (
             <motion.div 
               key={index}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="relative pl-8 md:pl-12 py-8 group"
