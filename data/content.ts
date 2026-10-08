@@ -43,7 +43,7 @@ export const PROJECTS = [
     title: "TracxnLabs",
     description: "Secure Online Examination Platform. Implements robust edge functions and relational database architecture for reliable and tamper-proof remote assessment.",
     tech: ["React", "TypeScript", "Vite", "Supabase", "Edge Functions"],
-    live: "https://transcx-labs.vercel.app/"
+    live: "https://transcx-labs.vercel.app/",
     github: "https://github.com/chethanhs-tech/-TranscxLabs",
     status: "LIVE",
     featured: true
